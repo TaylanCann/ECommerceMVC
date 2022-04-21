@@ -1,4 +1,5 @@
 ﻿using ECommerceMVC.Business;
+using ECommerceMVC.Business.Services;
 using ECommerceMVC.Entities;
 using ECommerceMVC.Models;
 using FluentValidation.Results;
@@ -15,27 +16,20 @@ namespace ECommerceMVC.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly IProductService productService;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger,IProductService productService)
         {
             _logger = logger;
+            this.productService = productService;
         }
 
         public IActionResult Index()
         {
-            
+            var products = productService.GetProducts();
 
             
-            var product = new List<Product>
-            {
-                new Product { Id = 1, Name = "MacBook Pro1" , Price=20000,Discount=0.09,Description="Perfect",CategoryId=1,
-                    ImageURL="https://productimages.hepsiburada.net/s/44/222-222/10817626898482.jpg/format:webp"},
-                new Product { Id = 1, Name = "MacBook Pro1" , Price=20000,Discount=0.09,Description="Perfect",CategoryId=1,
-                    ImageURL="https://productimages.hepsiburada.net/s/44/222-222/10817626898482.jpg/format:webp"},
-                new Product { Id = 1, Name = "MacBook Pro1" , Price=20000,Discount=0.09,Description="Perfect",CategoryId=1,
-                    ImageURL="https://productimages.hepsiburada.net/s/44/222-222/10817626898482.jpg/format:webp"},
-            };
-            
+         
             //ProductValidator validator = new ProductValidator();
             //ValidationResult results = validator.Validate(product);
             //if (!results.IsValid)
@@ -45,7 +39,7 @@ namespace ECommerceMVC.Controllers
             //        string errorMessage = $"{error.PropertyName} -> {error.ErrorMessage}";
             //    }
             //}
-            return View();
+            return View(products);
         }
 
         public IActionResult Privacy()
