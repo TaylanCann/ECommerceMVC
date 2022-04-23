@@ -7,16 +7,7 @@
     @foreach (var item in Model)
     {
         <div class="col-4">
-            <div class="card" >
-                <img class="card-img-top" src="@item.ImageURL" alt="Card image cap">
-                <div class="card-body">
-                    <h5 class="card-title">@item.Name</h5>
-                    <p class="card-text">@item.Description</p>
-                    <p class="card-text">@item.Price TL yerine @(item.Price * (1-item.Discount))TL</p>
-
-                    <a href="#" class="btn btn-primary">Sepete Ekle</a>
-                </div>
-            </div>
+           <partial name="_ProductCard" model="@item"></partial>
         </div>
     }
 </div>
