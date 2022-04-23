@@ -24,12 +24,18 @@ namespace ECommerceMVC.Controllers
             this.productService = productService;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(int page=1)
         {
             var products = productService.GetProducts();
+            var productPerPage = 3;
 
-            
-         
+            var paginatedProducts = products.OrderBy(x => x.Id)
+                                            .Skip((page - 1) * productPerPage)
+                                            .Take(productPerPage);
+
+            ViewBag.TotalPages = Math.Ceiling((decimal)products.Count / productPerPage);
+            return View(paginatedProducts);
+
             //ProductValidator validator = new ProductValidator();
             //ValidationResult results = validator.Validate(product);
             //if (!results.IsValid)
@@ -39,7 +45,6 @@ namespace ECommerceMVC.Controllers
             //        string errorMessage = $"{error.PropertyName} -> {error.ErrorMessage}";
             //    }
             //}
-            return View(products);
         }
 
         public IActionResult Privacy()
