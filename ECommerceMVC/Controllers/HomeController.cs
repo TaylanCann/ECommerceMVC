@@ -29,6 +29,7 @@ namespace ECommerceMVC.Controllers
             var products = productService.GetProducts();
             var productPerPage = 3;
 
+
             var paginatedProducts = products.OrderBy(x => x.Id)
                                             .Skip((page - 1) * productPerPage)
                                             .Take(productPerPage);
