@@ -27,6 +27,7 @@ namespace ECommerceMVC.Controllers
         public IActionResult Index(int page=1)
         {
             var products = productService.GetProducts();
+
             var productPerPage = 3;
 
             var paginatedProducts = products.OrderBy(x => x.Id)
