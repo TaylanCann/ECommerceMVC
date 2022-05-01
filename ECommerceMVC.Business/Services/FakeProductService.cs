@@ -26,6 +26,10 @@ namespace ECommerceMVC.Business.Services
                     ImageURL="https://productimages.hepsiburada.net/s/44/222-222/10817626898482.jpg/format:webp"},
                 new Product { Id = 6, Name = "MacBook Pro6" , Price=20000,Discount=0.09,Description="Perfect",CategoryId=1,
                     ImageURL="https://productimages.hepsiburada.net/s/44/222-222/10817626898482.jpg/format:webp"},
+                 new Product { Id = 7, Name = "MacBook Pro5" , Price=20000,Discount=0.09,Description="Perfect",CategoryId=1,
+                    ImageURL="https://productimages.hepsiburada.net/s/44/222-222/10817626898482.jpg/format:webp"},
+                new Product { Id = 8, Name = "MacBook Pro6" , Price=20000,Discount=0.09,Description="Perfect",CategoryId=1,
+                    ImageURL="https://productimages.hepsiburada.net/s/44/222-222/10817626898482.jpg/format:webp"}, 
             };
 
         }
