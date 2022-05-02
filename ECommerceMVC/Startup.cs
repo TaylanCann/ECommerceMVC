@@ -1,3 +1,4 @@
+using ECommerceMVC.Business.IServices;
 using ECommerceMVC.Business.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -25,7 +26,8 @@ namespace ECommerceMVC
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            services.AddScoped<IProductService,FakeProductService>();
+            services.AddScoped<IProductService , FakeProductService>();
+            services.AddScoped<ICategoryService , FakeCategoryService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
