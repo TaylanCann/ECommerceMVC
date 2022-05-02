@@ -32,7 +32,7 @@ namespace ECommerceMVC.Controllers
             var paginatedProducts = products.OrderBy(x => x.Id)
                                             .Skip((page - 1) * productPerPage)
                                             .Take(productPerPage);
-
+            ViewBag.CurrentPage = page;
             ViewBag.TotalPages = Math.Ceiling((decimal)products.Count / productPerPage);
             return View(paginatedProducts);
 
