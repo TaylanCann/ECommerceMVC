@@ -52,10 +52,16 @@ namespace ECommerceMVC
 
             app.UseEndpoints(endpoints =>
             {
+
+                endpoints.MapControllerRoute(
+                    name: "",
+                    pattern: "{category}/Page{page}",
+                    defaults: new { controller = "Home", action = "Index", page = 1, category = "Computer" });
+
                 endpoints.MapControllerRoute(
                     name: "",
                     pattern: "Page{page}",
-                    defaults:new {controller = "Home", action = "Index", page =1 });
+                    defaults:new {controller = "Home", action = "Index", page =1 });                
 
                 endpoints.MapControllerRoute(
                     name: "default",

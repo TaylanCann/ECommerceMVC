@@ -24,14 +24,15 @@ namespace ECommerceMVC.Controllers
             this.productService = productService;
         }
 
-        public IActionResult Index(int page=1)
+        public IActionResult Index(int page=1 , int? categoryId = null)
         {
-            var products = productService.GetProducts();
+            var products = categoryId == null ? productService.GetProducts():productService.GetProducts().Where(p=>p.CategoryId == categoryId).ToList() ;
 
             var productPerPage = 3;
             var paginatedProducts = products.OrderBy(x => x.Id)
                                             .Skip((page - 1) * productPerPage)
                                             .Take(productPerPage);
+            ViewBag.Category = categoryId;
             ViewBag.CurrentPage = page;
             ViewBag.TotalPages = Math.Ceiling((decimal)products.Count / productPerPage);
             return View(paginatedProducts);
