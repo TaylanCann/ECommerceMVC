@@ -1,4 +1,5 @@
 ﻿using ECommerceMVC.Business;
+using ECommerceMVC.Business.IServices;
 using ECommerceMVC.Business.Services;
 using ECommerceMVC.Entities;
 using ECommerceMVC.Models;
@@ -17,22 +18,38 @@ namespace ECommerceMVC.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IProductService productService;
+        private readonly ICategoryService categoryService;
 
-        public HomeController(ILogger<HomeController> logger,IProductService productService)
+        public HomeController(ILogger<HomeController> logger,IProductService productService,ICategoryService categoryService)
         {
             _logger = logger;
             this.productService = productService;
+            this.categoryService = categoryService;
         }
 
-        public IActionResult Index(int page=1 , int? categoryId = null)
+        public IActionResult Index(int page=1 , string category = null)
         {
-            var products = categoryId == null ? productService.GetProducts():productService.GetProducts().Where(p=>p.CategoryId == categoryId).ToList() ;
+            int? catId = null;
+            if (category != null)
+            {
+                var categories = categoryService.GetCategories();
+                foreach (var item in categories)
+                {
+                    if (item.Name == category)
+                    {
+                        catId = item.Id;
+                    }
+                }
+            }
+
+            var products = catId == null ? productService.GetProducts()
+                :productService.GetProducts().Where(p=>p.CategoryId == catId).ToList() ;
 
             var productPerPage = 3;
             var paginatedProducts = products.OrderBy(x => x.Id)
                                             .Skip((page - 1) * productPerPage)
                                             .Take(productPerPage);
-            ViewBag.Category = categoryId;
+            ViewBag.Category = category;
             ViewBag.CurrentPage = page;
             ViewBag.TotalPages = Math.Ceiling((decimal)products.Count / productPerPage);
             return View(paginatedProducts);
