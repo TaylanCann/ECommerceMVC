@@ -17,6 +17,12 @@ namespace ECommerceMVC.Business.Services
         {
             this.productRepository = productRepository;
         }
+
+        public async Task<int> AddProduct(Product product)
+        {
+            return await productRepository.Add(product);
+        }
+
         public async Task<ICollection<Product>> GetProducts()
         {
             return await productRepository.GetAllEntities();

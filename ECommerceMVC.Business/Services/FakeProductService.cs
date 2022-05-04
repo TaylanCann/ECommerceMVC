@@ -34,6 +34,11 @@ namespace ECommerceMVC.Business.Services
 
         }
 
+        public Task<int> AddProduct(Product product)
+        {
+            throw new NotImplementedException();
+        }
+
         public ICollection<Product> GetProducts()
         {
                 return _products;

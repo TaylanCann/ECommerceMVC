@@ -10,5 +10,6 @@ namespace ECommerceMVC.Business.Services
     public interface IProductService
     {
         Task<ICollection<Product>> GetProducts();
+        Task<int> AddProduct(Product product);
     }
 }
