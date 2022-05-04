@@ -23,9 +23,12 @@ namespace ECommerceMVC.DataAccess.Repositories
             return entity.Id;
         }
 
-        public Task Delete(int id)
+        public async Task Delete(int id)
         {
-            throw new NotImplementedException();
+            var product = await context.Products.FirstOrDefaultAsync(x => x.Id == id);
+            product.IsActive = false;
+            await context.SaveChangesAsync();
+            //return context.Products.Remove(product);
         }
 
         public async Task<IList<Product>> GetAllEntities()
@@ -33,19 +36,20 @@ namespace ECommerceMVC.DataAccess.Repositories
             return await context.Products.ToListAsync();
         }
 
-        public Task<Product> GetEntityById(int id)
+        public async Task<Product> GetEntityById(int id)
         {
-            throw new NotImplementedException();
+            return await context.Products.FindAsync(id);
         }
 
-        public Task<IList<Product>> SearchProductsByName(string name)
+        public async Task<IList<Product>> SearchProductsByName(string name)
         {
-            throw new NotImplementedException();
+            return await context.Products.Where(p => p.Name.Contains(name)).ToListAsync();
         }
 
-        public Task<int> Update(Product entity)
+        public async Task<int> Update(Product entity)
         {
-            throw new NotImplementedException();
+            context.Products.Update(entity);
+            return await context.SaveChangesAsync();
         }
     }
 }
