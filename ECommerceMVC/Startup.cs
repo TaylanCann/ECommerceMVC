@@ -1,6 +1,7 @@
 using ECommerceMVC.Business.IServices;
 using ECommerceMVC.Business.Services;
 using ECommerceMVC.DataAccess.Data;
+using ECommerceMVC.DataAccess.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -30,6 +31,7 @@ namespace ECommerceMVC
             services.AddControllersWithViews();
             services.AddScoped<IProductService , ProductService>();
             services.AddScoped<ICategoryService , CategoryService>();
+            services.AddScoped<IProductRepository, EFProductRepository>();
             var connectionString = Configuration.GetConnectionString("db");
             services.AddDbContext<ECommerceDbContext>(opt => opt.UseSqlServer(connectionString));
         }

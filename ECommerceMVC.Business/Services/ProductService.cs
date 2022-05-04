@@ -1,4 +1,5 @@
 ﻿using ECommerceMVC.DataAccess.Data;
+using ECommerceMVC.DataAccess.Repositories;
 using ECommerceMVC.Entities;
 using System;
 using System.Collections.Generic;
@@ -10,14 +11,15 @@ namespace ECommerceMVC.Business.Services
 {
     public class ProductService : IProductService
     {
-        private ECommerceDbContext dbContext;
-        public ProductService(ECommerceDbContext dbContext)
+        private IProductRepository productRepository;
+
+        public ProductService(IProductRepository productRepository)
         {
-            this.dbContext = dbContext;
+            this.productRepository = productRepository;
         }
-        public ICollection<Product> GetProducts()
+        public async Task<ICollection<Product>> GetProducts()
         {
-            return dbContext.Products.ToList();
+            return await productRepository.GetAllEntities();
         }
     }
 }

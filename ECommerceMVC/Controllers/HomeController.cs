@@ -27,7 +27,7 @@ namespace ECommerceMVC.Controllers
             this.categoryService = categoryService;
         }
 
-        public IActionResult Index(int page=1 , string category = null)
+        public async Task<IActionResult> Index(int page=1 , string category = null)
         {
             int? catId = null;
             if (category != null)
@@ -42,8 +42,9 @@ namespace ECommerceMVC.Controllers
                 }
             }
 
-            var products = catId == null ? productService.GetProducts()
-                :productService.GetProducts().Where(p=>p.CategoryId == catId).ToList() ;
+            var productsFromService = await productService.GetProducts();
+            var products = catId == null ? productsFromService
+                : productsFromService.Where(p=>p.CategoryId == catId).ToList() ;
 
             var productPerPage = 3;
             var paginatedProducts = products.OrderBy(x => x.Id)

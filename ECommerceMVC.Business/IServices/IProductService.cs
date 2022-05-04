@@ -9,6 +9,6 @@ namespace ECommerceMVC.Business.Services
 {
     public interface IProductService
     {
-        ICollection<Product> GetProducts();
+        Task<ICollection<Product>> GetProducts();
     }
 }

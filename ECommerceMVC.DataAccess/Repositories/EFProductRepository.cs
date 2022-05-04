@@ -1,5 +1,6 @@
 ﻿using ECommerceMVC.DataAccess.Data;
 using ECommerceMVC.Entities;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,9 +28,9 @@ namespace ECommerceMVC.DataAccess.Repositories
             throw new NotImplementedException();
         }
 
-        public Task<IList<Product>> GetAllEntities()
+        public async Task<IList<Product>> GetAllEntities()
         {
-            throw new NotImplementedException();
+            return await context.Products.ToListAsync();
         }
 
         public Task<Product> GetEntityById(int id)

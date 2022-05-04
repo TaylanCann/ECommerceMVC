@@ -38,5 +38,10 @@ namespace ECommerceMVC.Business.Services
         {
                 return _products;
         }
+
+        Task<ICollection<Product>> IProductService.GetProducts()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
