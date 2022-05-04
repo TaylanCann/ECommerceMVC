@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ECommerceMVC.DataAccess.Repositories
 {
-    public interface IRepository
+    public interface IRepository<T>
     {
     }
 }
