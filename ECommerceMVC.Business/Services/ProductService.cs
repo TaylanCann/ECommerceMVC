@@ -1,5 +1,6 @@
 ﻿using ECommerceMVC.DataAccess.Data;
 using ECommerceMVC.DataAccess.Repositories;
+using ECommerceMVC.Dtos.Requests;
 using ECommerceMVC.Dtos.Responses;
 using ECommerceMVC.Entities;
 using System;
@@ -19,8 +20,19 @@ namespace ECommerceMVC.Business.Services
             this.productRepository = productRepository;
         }
 
-        public async Task<int> AddProduct(Product product)
+        public async Task<int> AddProduct(AddProductRequest request)
         {
+            var product = new Product
+            {
+                CategoryId = request.CategoryId,
+                Name = request.Name,
+                Description = request.Description,
+                CreatedDate = DateTime.Now,
+                Discount = request.Discount,
+                ImageURL = request.ImageURL,
+                Price = request.Price,
+            };
+
             return await productRepository.Add(product);
         }
 
