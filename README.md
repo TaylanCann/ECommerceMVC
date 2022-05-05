@@ -6,3 +6,4 @@ Bootstrap 5.1.13 <br>
 Open/Closed Principle <br>
 Dependency Inversion Principle <br> 
 Repository Pattern <br> 
+Protection from Brute Force Attack <br>
