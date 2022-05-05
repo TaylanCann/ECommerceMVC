@@ -1,4 +1,5 @@
-﻿using ECommerceMVC.Entities;
+﻿using ECommerceMVC.Dtos.Responses;
+using ECommerceMVC.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -44,7 +45,12 @@ namespace ECommerceMVC.Business.Services
                 return _products;
         }
 
-        Task<ICollection<Product>> IProductService.GetProducts()
+        //Task<ICollection<Product>> IProductService.GetProducts()
+        //{
+        //    throw new NotImplementedException();
+        //}
+
+        Task<ICollection<ProductListResponse>> IProductService.GetProducts()
         {
             throw new NotImplementedException();
         }

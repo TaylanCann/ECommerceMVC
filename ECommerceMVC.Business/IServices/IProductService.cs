@@ -1,4 +1,5 @@
-﻿using ECommerceMVC.Entities;
+﻿using ECommerceMVC.Dtos.Responses;
+using ECommerceMVC.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace ECommerceMVC.Business.Services
 {
     public interface IProductService
     {
-        Task<ICollection<Product>> GetProducts();
+        Task<ICollection<ProductListResponse>> GetProducts();
         Task<int> AddProduct(Product product);
     }
 }
