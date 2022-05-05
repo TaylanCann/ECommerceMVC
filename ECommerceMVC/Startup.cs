@@ -1,4 +1,5 @@
 using ECommerceMVC.Business.IServices;
+using ECommerceMVC.Business.MapperProfile;
 using ECommerceMVC.Business.Services;
 using ECommerceMVC.DataAccess.Data;
 using ECommerceMVC.DataAccess.Repositories;
@@ -34,6 +35,7 @@ namespace ECommerceMVC
             services.AddScoped<IProductRepository, EFProductRepository>();
             var connectionString = Configuration.GetConnectionString("db");
             services.AddDbContext<ECommerceDbContext>(opt => opt.UseSqlServer(connectionString));
+            services.AddAutoMapper(typeof(MapProfile));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

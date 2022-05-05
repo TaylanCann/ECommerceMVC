@@ -1,4 +1,5 @@
-﻿using ECommerceMVC.Dtos.Responses;
+﻿using ECommerceMVC.Dtos.Requests;
+using ECommerceMVC.Dtos.Responses;
 using ECommerceMVC.Entities;
 using System;
 using System.Collections.Generic;
@@ -35,7 +36,12 @@ namespace ECommerceMVC.Business.Services
 
         }
 
-        public Task<int> AddProduct(Product product)
+        //public Task<int> AddProduct(Product product)
+        //{
+        //    throw new NotImplementedException();
+        //}
+
+        public Task<int> AddProduct(AddProductRequest product)
         {
             throw new NotImplementedException();
         }
