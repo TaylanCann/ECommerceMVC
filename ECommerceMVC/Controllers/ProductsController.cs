@@ -1,5 +1,6 @@
 ﻿using ECommerceMVC.Business.IServices;
 using ECommerceMVC.Business.Services;
+using ECommerceMVC.Dtos.Requests;
 using ECommerceMVC.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -37,11 +38,11 @@ namespace ECommerceMVC.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(Product product)
+        public async Task<IActionResult> Create(AddProductRequest request)
         {
             if (ModelState.IsValid)
             {
-                int addedProductId = await productService.AddProduct(product);
+                int addedProductId = await productService.AddProduct(request);
                 return RedirectToAction(nameof(Index));
             }
             return View();
