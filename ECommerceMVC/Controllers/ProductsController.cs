@@ -1,6 +1,7 @@
 ﻿using ECommerceMVC.Business.IServices;
 using ECommerceMVC.Business.Services;
 using ECommerceMVC.Dtos.Requests;
+using ECommerceMVC.Dtos.Responses;
 using ECommerceMVC.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -53,7 +54,8 @@ namespace ECommerceMVC.Controllers
         {
             if (await productService.IsExist(id))
             {
-
+                ProductListResponse response = await ProductService.GetProductById(id);
+                return View(response); 
             }
             return NotFound();
         }

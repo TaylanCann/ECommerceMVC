@@ -40,6 +40,13 @@ namespace ECommerceMVC.Business.Services
             return await productRepository.Add(product);
         }
 
+        public async Task<ProductListResponse> GetProductById(int id)
+        {
+            Product product = await productRepository.GetEntityById(id);
+            var response = mapper.Map<ProductListResponse>(product);
+            return response;
+        }
+
         public async Task<ICollection<ProductListResponse>> GetProducts()
         {
             var products = await productRepository.GetAllEntities();
@@ -59,6 +66,8 @@ namespace ECommerceMVC.Business.Services
             var productListResponses = mapper.Map<List<ProductListResponse>>(products);
             return productListResponses;
         }
+
+       
 
         public async Task<bool> IsExist(int id)
         {
