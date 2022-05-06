@@ -7,3 +7,4 @@ Open/Closed Principle <br>
 Dependency Inversion Principle <br> 
 Repository Pattern <br> 
 Protection from Brute Force Attack <br>
+Protection from Cross Site Request Forgery (XSRF) Attack
