@@ -41,6 +41,11 @@ namespace ECommerceMVC.DataAccess.Repositories
             return await context.Products.FindAsync(id);
         }
 
+        public async Task<bool> IsExist(int id)
+        {
+            return await context.Products.AnyAsync(p => p.Id == id);
+        }
+
         public async Task<IList<Product>> SearchProductsByName(string name)
         {
             return await context.Products.Where(p => p.Name.Contains(name)).ToListAsync();

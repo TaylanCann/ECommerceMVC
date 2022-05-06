@@ -48,5 +48,14 @@ namespace ECommerceMVC.Controllers
             }
             return View();
         }
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id) 
+        {
+            if (await productService.IsExist(id))
+            {
+
+            }
+            return NotFound();
+        }
     }
 }

@@ -13,9 +13,10 @@ namespace ECommerceMVC.DataAccess.Repositories
         Task<T> GetEntityById(int id);
         Task<int> Add(T entity);
         Task<int> Update(T entity);
-        Task Delete(int id); 
+        Task Delete(int id);
+        Task<bool> IsExist(int id);
 
     }
 
-    
+
 }

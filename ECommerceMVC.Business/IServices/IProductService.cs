@@ -13,5 +13,6 @@ namespace ECommerceMVC.Business.Services
     {
         Task<ICollection<ProductListResponse>> GetProducts();
         Task<int> AddProduct(AddProductRequest product);
+        Task<bool> IsExist(int id);
     }
 }

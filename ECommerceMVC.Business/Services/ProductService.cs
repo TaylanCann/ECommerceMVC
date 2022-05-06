@@ -59,5 +59,10 @@ namespace ECommerceMVC.Business.Services
             var productListResponses = mapper.Map<List<ProductListResponse>>(products);
             return productListResponses;
         }
+
+        public async Task<bool> IsExist(int id)
+        {
+            return await productRepository.IsExist(id);
+        }
     }
 }
