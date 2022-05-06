@@ -28,14 +28,14 @@ namespace ECommerceMVC.DataAccess.Repositories
         public async Task Delete(int id)
         {
             var product = await context.Products.FirstOrDefaultAsync(x => x.Id == id);
+            //return context.Products.Remove(product);
             product.IsActive = false;
             await context.SaveChangesAsync();
-            //return context.Products.Remove(product);
         }
 
         public async Task<IList<Product>> GetAllEntities()
         {
-            return await context.Products.ToListAsync();
+            return await context.Products.Where(p=>p.IsActive==true).ToListAsync();
         }
 
         public async Task<Product> GetEntityById(int id)

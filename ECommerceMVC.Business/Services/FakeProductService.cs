@@ -46,6 +46,11 @@ namespace ECommerceMVC.Business.Services
             throw new NotImplementedException();
         }
 
+        public Task DeleteProduct(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         public Task<ProductListResponse> GetProductById(int id)
         {
             throw new NotImplementedException();
