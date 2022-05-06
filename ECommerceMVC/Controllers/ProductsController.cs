@@ -38,7 +38,8 @@ namespace ECommerceMVC.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(AddProductRequest request)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create([Bind("Name","Price","Discount","Descripton","CategoryId","ImageURL")]AddProductRequest request)
         {
             if (ModelState.IsValid)
             {

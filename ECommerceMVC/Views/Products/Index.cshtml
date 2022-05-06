@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ECommerceMVC.Entities.Product>
+﻿@model IEnumerable<ProductListResponse>
 
 @{
     ViewData["Title"] = "Index";
@@ -33,15 +33,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.ImageURL)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CreatedDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UpdateDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IsActive)
-            </th>
+           
             <th></th>
         </tr>
     </thead>
@@ -69,15 +61,7 @@
             <td>
                 <img src="@item.ImageURL" class="img-thumbnail" alt="Alternate-Text"/>
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CreatedDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UpdateDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsActive)
-            </td>
+            
             <td>
                 @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
                 @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
