@@ -15,5 +15,6 @@ namespace ECommerceMVC.Business.Services
         Task<int> AddProduct(AddProductRequest product);
         Task<bool> IsExist(int id);
         Task<ProductListResponse> GetProductById(int id);
+        Task<int> UpdateProduct(UpdateProductRequest request);
     }
 }

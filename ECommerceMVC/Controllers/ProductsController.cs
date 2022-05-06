@@ -28,14 +28,28 @@ namespace ECommerceMVC.Controllers
         }
 
         [HttpGet]
-        public IActionResult Create() 
+        public IActionResult Create()
+        {
+            List<SelectListItem> selectedItems = GetCategoriesForDropDown();
+
+            ViewBag.Categories = selectedItems;
+
+            return View();
+        }
+
+        private List<SelectListItem> GetCategoriesForDropDown()
         {
             var selectedItems = new List<SelectListItem>();
-            categoryService.GetCategories().ToList().ForEach(cat => selectedItems.Add(new
-                SelectListItem
-            { Text = cat.Name, Value = cat.Id.ToString() }));
-            ViewBag.Categories = selectedItems;
-            return View();
+            categoryService.GetCategories()
+                           .ToList()
+                           .ForEach(cat => selectedItems.Add(
+                               new SelectListItem
+                               {
+                                   Text = cat.Name,
+                                   Value = cat.Id.ToString()
+                               })
+            );
+            return selectedItems;
         }
 
         [HttpPost]
@@ -54,10 +68,26 @@ namespace ECommerceMVC.Controllers
         {
             if (await productService.IsExist(id))
             {
-                ProductListResponse response = await ProductService.GetProductById(id);
+                ProductListResponse response = await productService.GetProductById(id);
+                ViewBag.Categories = GetCategoriesForDropDown();
                 return View(response); 
             }
             return NotFound();
+        }
+        [HttpPost]
+        public async Task<IActionResult> Edit(UpdateProductRequest request) 
+        {
+            if (ModelState.IsValid)
+            {
+               int affectedRowCount = await productService.UpdateProduct(request);
+                if (affectedRowCount>0)
+                {
+                    return RedirectToAction(nameof(Index));
+                }
+                return BadRequest();
+            }
+            ViewBag.Categories = GetCategoriesForDropDown();
+            return View();
         }
     }
 }

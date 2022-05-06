@@ -18,6 +18,8 @@ namespace ECommerceMVC.DataAccess.Repositories
         }
         public async Task<int> Add(Product entity)
         {
+            entity.CreatedDate = DateTime.Now;
+            entity.IsActive = true;
             await context.Products.AddAsync(entity);
             await context.SaveChangesAsync();
             return entity.Id;
@@ -53,6 +55,7 @@ namespace ECommerceMVC.DataAccess.Repositories
 
         public async Task<int> Update(Product entity)
         {
+            entity.UpdateDate = DateTime.Now;
             context.Products.Update(entity);
             return await context.SaveChangesAsync();
         }

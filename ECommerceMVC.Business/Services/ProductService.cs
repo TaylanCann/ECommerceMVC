@@ -73,5 +73,12 @@ namespace ECommerceMVC.Business.Services
         {
             return await productRepository.IsExist(id);
         }
+
+        public async Task<int> UpdateProduct(UpdateProductRequest request)
+        {
+            var product = mapper.Map<Product>(request);
+            var result = await productRepository.Update(product);
+            return result;
+        }
     }
 }
