@@ -89,5 +89,15 @@ namespace ECommerceMVC.Controllers
             ViewBag.Categories = GetCategoriesForDropDown();
             return View();
         }
+        [HttpGet]
+        public async Task<IActionResult> Delete(int id)
+        {
+            if (await productService.IsExist(id))
+            {
+                var product = productService.GetProductById(id);
+                return View(product);
+            }
+            return NotFound();
+        }
     }
 }
