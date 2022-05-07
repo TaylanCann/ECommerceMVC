@@ -15,7 +15,9 @@ namespace ECommerceMVC.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult Login(UserLoginModel model,string returnUrl)
-        { }
+        public IActionResult LoginOk(UserLoginModel model,string returnUrl)
+        {
+            return Ok();
+        }
     }
 }
