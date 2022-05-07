@@ -15,5 +15,8 @@ namespace ECommerceMVC.Entities
         public string Password { get; set; }
         public string EMail { get; set; }
         public string Role { get; set; }
+        public DateTime? CreatedDate { get; set; }
+        public DateTime? UpdateDate { get; set; }
+        public bool? IsActive { get; set; } = true;
     }
 }
