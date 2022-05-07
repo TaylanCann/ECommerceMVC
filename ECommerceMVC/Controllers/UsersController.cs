@@ -8,8 +8,9 @@ namespace ECommerceMVC.Controllers
         {
             return View();
         }
-        public IActionResult Login() 
+        public IActionResult Login(string returnUrl) 
         {
+            ViewBag.ReturnUrl = returnUrl;
             return View();
         }
     }
