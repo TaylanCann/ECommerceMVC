@@ -17,6 +17,7 @@ namespace ECommerceMVC.DataAccess.Data
 
         public DbSet<Product> Products { get; set; }
         public DbSet<Category> Categories { get; set; }
+        public DbSet<User> Users { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Product>().HasOne(p => p.Category)
@@ -101,6 +102,46 @@ namespace ECommerceMVC.DataAccess.Data
 
                 }
             );
+            #endregion
+
+            #region Second Real Datas
+            
+            modelBuilder.Entity<User>().HasData(
+
+               new User 
+               { 
+                   Id = 1,
+                   FullName = "Taylan Can Hardal",
+                   UserName = "T",
+                   Password = "123",
+                   EMail = "taylancanh@gmail.com",
+                   Role = "Admin"
+               },
+
+               new User
+               {
+                   Id = 2,
+                   FullName = "Editör Can Hardal2",
+                   UserName = "T2",
+                   Password = "123",
+                   EMail = "editorcanh2@gmail.com",
+                   Role = "Editor"
+               },
+
+               new User
+               {
+                   Id = 3,
+                   FullName = "Client Can Hardal3",
+                   UserName = "T3",
+                   Password = "123",
+                   EMail = "clientcanh3@gmail.com",
+                   Role = "Client"
+               }
+
+               
+
+           );
+
             #endregion
         }
     }
