@@ -3,6 +3,7 @@ using ECommerceMVC.Business.MapperProfile;
 using ECommerceMVC.Business.Services;
 using ECommerceMVC.DataAccess.Data;
 using ECommerceMVC.DataAccess.Repositories;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -36,6 +37,12 @@ namespace ECommerceMVC
             var connectionString = Configuration.GetConnectionString("db");
             services.AddDbContext<ECommerceDbContext>(opt => opt.UseSqlServer(connectionString));
             services.AddAutoMapper(typeof(MapProfile));
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                    .AddCookie(options =>
+                    {
+                        options.LoginPath = "/Users/Login";
+                        options.AccessDeniedPath = "/Users/AccessDenied";
+                    });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -56,6 +63,7 @@ namespace ECommerceMVC
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
