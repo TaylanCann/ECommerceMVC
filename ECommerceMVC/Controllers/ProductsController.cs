@@ -3,6 +3,7 @@ using ECommerceMVC.Business.Services;
 using ECommerceMVC.Dtos.Requests;
 using ECommerceMVC.Dtos.Responses;
 using ECommerceMVC.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Collections.Generic;
@@ -11,6 +12,7 @@ using System.Threading.Tasks;
 
 namespace ECommerceMVC.Controllers
 {
+    [Authorize]
     public class ProductsController : Controller
     {
         private readonly IProductService productService;
