@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace ECommerceMVC.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Admin,Editor")]
     public class ProductsController : Controller
     {
         private readonly IProductService productService;
@@ -23,6 +23,7 @@ namespace ECommerceMVC.Controllers
             this.productService = productService;
             this.categoryService = categoryService;
         }
+        [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
             var products = await productService.GetProducts();
