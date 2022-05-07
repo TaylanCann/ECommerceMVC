@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using ECommerceMVC.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace ECommerceMVC.Controllers
 {
@@ -13,5 +14,8 @@ namespace ECommerceMVC.Controllers
             ViewBag.ReturnUrl = returnUrl;
             return View();
         }
+        [HttpPost]
+        public IActionResult Login(UserLoginModel model,string returnUrl)
+        { }
     }
 }
