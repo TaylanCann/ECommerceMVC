@@ -17,9 +17,10 @@ namespace ECommerceMVC.Business.Services
         {
             this.userRepository = userRepository;
         }
-        public User ValidateUser(string UserName, string Password)
+
+        public Task<User> ValidateUser(string UserName, string Password)
         {
-            throw new NotImplementedException();
+            return userRepository.Validate(UserName, Password);
         }
     }
 }

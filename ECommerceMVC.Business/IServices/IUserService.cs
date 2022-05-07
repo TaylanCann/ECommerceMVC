@@ -9,6 +9,6 @@ namespace ECommerceMVC.Business.IServices
 {
     public interface IUserService
     {
-        User ValidateUser(string UserName, string Password);
+        Task<User> ValidateUser(string UserName, string Password);
     }
 }

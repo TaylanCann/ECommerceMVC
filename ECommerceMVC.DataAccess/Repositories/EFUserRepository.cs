@@ -42,14 +42,14 @@ namespace ECommerceMVC.DataAccess.Repositories
             throw new NotImplementedException();
         }
 
-        public Task<IList<User>> SearchUsersByName(string name)
+        public Task<int> Update(User entity)
         {
             throw new NotImplementedException();
         }
 
-        public Task<int> Update(User entity)
+        public async Task<User> Validate(string UserName, string Password)
         {
-            throw new NotImplementedException();
+            return await context.Users.FirstOrDefaultAsync(u => u.UserName == UserName && u.Password == Password && u.IsActive == true);
         }
     }
 }

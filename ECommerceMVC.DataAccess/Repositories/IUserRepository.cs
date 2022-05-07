@@ -9,7 +9,7 @@ namespace ECommerceMVC.DataAccess.Repositories
 {
     public interface IUserRepository : IRepository<User>
     {
-        Task<IList<User>> SearchUsersByName(string name);
+        Task<User> Validate(string UserName, string Password);
 
     }
 }
