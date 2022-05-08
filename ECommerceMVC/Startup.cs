@@ -35,9 +35,9 @@ namespace ECommerceMVC
             services.AddScoped<IProductRepository, EFProductRepository>();
 
             services.AddScoped<ICategoryService , CategoryService>();
-            
-            services.AddScoped<IUserRepository, EFUserRepository>();
+
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IUserRepository, EFUserRepository>();
 
             var connectionString = Configuration.GetConnectionString("db");
 
