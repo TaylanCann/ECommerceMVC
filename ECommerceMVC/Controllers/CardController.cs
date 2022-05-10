@@ -35,7 +35,7 @@ namespace ECommerceMVC.Controllers
 
         private void saveToSession(CardCollection cardCollection)
         {
-            throw new NotImplementedException();
+            HttpContext.Session.SetString("basket", JsonConvert.SerializeObject(cardCollection));
         }
 
         private CardCollection getCollectionFromSession()
@@ -47,7 +47,7 @@ namespace ECommerceMVC.Controllers
             }
             else
             {
-                var cartCollectionJson = HttpContext.Session.GetString("myBasket");
+                var cartCollectionJson = HttpContext.Session.GetString("basket");
                 JsonConvert.DeserializeObject<CardCollection>(cartCollectionJson);
             }
             return cardCollection;
