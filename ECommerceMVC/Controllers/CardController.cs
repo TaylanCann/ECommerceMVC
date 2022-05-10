@@ -39,10 +39,12 @@ namespace ECommerceMVC.Controllers
 
         private CardCollection getCollectionFromSession()
         {
-            if (HttpContext.Session.Get("sepet")==null) 
+            CardCollection cardCollection = null;
+            if (HttpContext.Session.Get("basket")==null) 
             {
-
+                return new CardCollection();
             }
+            return cardCollection;
         }
     }
 }
