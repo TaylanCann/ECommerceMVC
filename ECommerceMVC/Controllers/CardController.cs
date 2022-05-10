@@ -24,6 +24,7 @@ namespace ECommerceMVC.Controllers
             {
                 var product = await productService.GetProductById(id);
                 CardCollection cardCollection = getCollectionFromSession(); 
+                cardCollection.Add(new CardItem { Product=product, Piece=1});
                 return Json($"{product.Name} added to basket");
             }
             return NotFound();
