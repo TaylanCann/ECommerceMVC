@@ -2,6 +2,7 @@
 using ECommerceMVC.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using System;
 using System.Threading.Tasks;
 
@@ -42,7 +43,12 @@ namespace ECommerceMVC.Controllers
             CardCollection cardCollection = null;
             if (HttpContext.Session.Get("basket")==null) 
             {
-                return new CardCollection();
+                cardCollection = new CardCollection();
+            }
+            else
+            {
+                var cartCollectionJson = HttpContext.Session.GetString("myBasket");
+                JsonConvert.DeserializeObject<CardCollection>(cartCollectionJson);
             }
             return cardCollection;
         }
