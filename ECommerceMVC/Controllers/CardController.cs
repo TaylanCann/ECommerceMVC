@@ -1,5 +1,6 @@
 ﻿using ECommerceMVC.Business.Services;
 using ECommerceMVC.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
@@ -25,14 +26,23 @@ namespace ECommerceMVC.Controllers
                 var product = await productService.GetProductById(id);
                 CardCollection cardCollection = getCollectionFromSession(); 
                 cardCollection.Add(new CardItem { Product=product, Piece=1});
+                saveToSession(cardCollection);
                 return Json($"{product.Name} added to basket");
             }
             return NotFound();
         }
 
-        private CardCollection getCollectionFromSession()
+        private void saveToSession(CardCollection cardCollection)
         {
             throw new NotImplementedException();
+        }
+
+        private CardCollection getCollectionFromSession()
+        {
+            if (HttpContext.Session.Get("sepet")==null) 
+            {
+
+            }
         }
     }
 }
