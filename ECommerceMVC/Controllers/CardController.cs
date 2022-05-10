@@ -1,5 +1,7 @@
 ﻿using ECommerceMVC.Business.Services;
+using ECommerceMVC.Models;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Threading.Tasks;
 
 namespace ECommerceMVC.Controllers
@@ -21,9 +23,15 @@ namespace ECommerceMVC.Controllers
             if (await productService.IsExist(id))
             {
                 var product = await productService.GetProductById(id);
+                CardCollection cardCollection = getCollectionFromSession(); 
                 return Json($"{product.Name} added to basket");
             }
             return NotFound();
+        }
+
+        private CardCollection getCollectionFromSession()
+        {
+            throw new NotImplementedException();
         }
     }
 }
