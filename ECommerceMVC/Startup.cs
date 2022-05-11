@@ -33,16 +33,14 @@ namespace ECommerceMVC
             services.AddControllersWithViews();
             services.AddScoped<IProductService , ProductService>();
             services.AddScoped<IProductRepository, EFProductRepository>();
-
             services.AddScoped<ICategoryService , CategoryService>();
-
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IUserRepository, EFUserRepository>();
 
             var connectionString = Configuration.GetConnectionString("db");
-
             services.AddDbContext<ECommerceDbContext>(opt => opt.UseSqlServer(connectionString));
             services.AddAutoMapper(typeof(MapProfile));
+            services.AddSession();
             
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                     .AddCookie(options =>
