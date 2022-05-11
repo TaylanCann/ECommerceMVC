@@ -5,28 +5,28 @@ using System.Linq;
 namespace ECommerceMVC.Models
 {
 
-    public class CardItem
+    public class CartItem
     {
         public ProductListResponse Product { get; set; }
         public int Piece { get; set; }
     }
-    public class CardCollection
+    public class CartCollection
     {
-        public List<CardItem> cardItems { get; set; } = new List<CardItem>();
-        public void Add(CardItem cardItem) 
+        public List<CartItem> cartItems { get; set; } = new List<CartItem>();
+        public void Add(CartItem cartItem) 
         {
-            var finding = cardItems.Find(c => c.Product.Id == cardItem.Product.Id);
+            var finding = cartItems.Find(c => c.Product.Id == cartItem.Product.Id);
             if (finding == null)
             {
-                cardItems.Add(cardItem);
+                cartItems.Add(cartItem);
             }
             else
             {
-                finding.Piece += cardItem.Piece;
+                finding.Piece += cartItem.Piece;
             }
         }
-        public void ClearAll()=>cardItems.Clear();
-        public double GetTotalPrice() => cardItems.Sum(c => c.Product.Price.Value * (1-c.Product.Discount.Value)* c.Piece);
-        public void Delete(int id) => cardItems.RemoveAll(c => c.Product.Id == id);
+        public void ClearAll()=> cartItems.Clear();
+        public double GetTotalPrice() => cartItems.Sum(c => c.Product.Price.Value * (1-c.Product.Discount.Value)* c.Piece);
+        public void Delete(int id) => cartItems.RemoveAll(c => c.Product.Id == id);
     }
 }
