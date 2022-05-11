@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace ECommerceMVC.Controllers
 {
-    public class CardController : Controller
+    public class CartController : Controller
     {
         private readonly IProductService productService;
 
-        public CardController(IProductService productService)
+        public CartController(IProductService productService)
         {
             this.productService = productService;
         }
