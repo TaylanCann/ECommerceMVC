@@ -25,30 +25,30 @@ namespace ECommerceMVC.Controllers
             if (await productService.IsExist(id))
             {
                 var product = await productService.GetProductById(id);
-                CardCollection cardCollection = getCollectionFromSession(); 
-                cardCollection.Add(new CardItem { Product=product, Piece=1});
-                saveToSession(cardCollection);
+                CartCollection cartCollection = getCollectionFromSession(); 
+                cartCollection.Add(new CartItem { Product=product, Piece=1});
+                saveToSession(cartCollection);
                 return Json($"{product.Name} added to basket");
             }
             return NotFound();
         }
 
-        private void saveToSession(CardCollection cardCollection)
+        private void saveToSession(CartCollection cardCollection)
         {
             HttpContext.Session.SetString("basket", JsonConvert.SerializeObject(cardCollection));
         }
 
-        private CardCollection getCollectionFromSession()
+        private CartCollection getCollectionFromSession()
         {
-            CardCollection cardCollection = null;
+            CartCollection cardCollection = null;
             if (HttpContext.Session.Get("basket")==null) 
             {
-                cardCollection = new CardCollection();
+                cardCollection = new CartCollection();
             }
             else
             {
                 var cartCollectionJson = HttpContext.Session.GetString("basket");
-                JsonConvert.DeserializeObject<CardCollection>(cartCollectionJson);
+                JsonConvert.DeserializeObject<CartCollection>(cartCollectionJson);
             }
             return cardCollection;
         }
