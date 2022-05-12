@@ -40,17 +40,17 @@ namespace ECommerceMVC.Controllers
 
         private CartCollection getCollectionFromSession()
         {
-            CartCollection cardCollection = null;
+            CartCollection cartCollection = null;
             if (HttpContext.Session.Get("basket")==null) 
             {
-                cardCollection = new CartCollection();
+                cartCollection = new CartCollection();
             }
             else
             {
                 var cartCollectionJson = HttpContext.Session.GetString("basket");
                 JsonConvert.DeserializeObject<CartCollection>(cartCollectionJson);
             }
-            return cardCollection;
+            return cartCollection;
         }
     }
 }
