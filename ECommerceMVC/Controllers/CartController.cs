@@ -45,14 +45,24 @@ namespace ECommerceMVC.Controllers
         private CartCollection getCollectionFromSession()
         {
             CartCollection cartCollection = null;
-            if (HttpContext.Session.Get("basket")==null) 
+            //if (HttpContext.Session.GetString("sepetim") == null)
+            //{
+            //    cartCollection = new CartCollection();
+            //}
+            //else
+            //{
+            //    var cartCollectionJson = HttpContext.Session.GetString("sepetim");
+            //    cartCollection = JsonConvert.DeserializeObject<CartCollection>(cartCollectionJson);
+
+            //}
+            if (HttpContext.Session.GetString("basket") == null) 
             {
                 cartCollection = new CartCollection();
             }
             else
             {
                 var cartCollectionJson = HttpContext.Session.GetString("basket");
-                JsonConvert.DeserializeObject<CartCollection>(cartCollectionJson);
+                cartCollection = JsonConvert.DeserializeObject<CartCollection>(cartCollectionJson);
             }
             return cartCollection;
         }
