@@ -24,9 +24,13 @@ namespace ECommerceMVC.Controllers
         {
             if (await productService.IsExist(id))
             {
+                //var product = null;
                 var product = await productService.GetProductById(id);
-                CartCollection cartCollection = getCollectionFromSession(); 
-                cartCollection.Add(new CartItem { Product=product, Piece=1});
+                CartCollection cartCollection = getCollectionFromSession();
+                CartItem newCart = new CartItem();
+                newCart.Product = product;
+                newCart.Piece = 1;
+                cartCollection.Add(newCart);
                 saveToSession(cartCollection);
                 return Json($"{product.Name} added to basket");
             }
