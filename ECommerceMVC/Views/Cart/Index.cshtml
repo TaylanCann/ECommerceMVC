@@ -1,0 +1,41 @@
+﻿@model CartCollection
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+@if (Model.cartItems.Count==0)
+{
+    <div class="alert alert-warning">
+        There is no product in your basket.
+    </div>
+}
+else
+{
+    <table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Product Name</th>
+            <th>Piece</th>
+            <th>Total</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.cartItems)
+        {
+            <tr>
+                <td>@item.Product.Name</td>
+                <td>@item.Piece</td>
+                <td>@(item.Product.Price * (1-item.Product.Discount) * item.Piece)</td>
+            </tr>
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="4" >Toplam: @Model.GetTotalPrice() TL</td>
+        </tr>
+    </tfoot>
+</table>
+
+}
