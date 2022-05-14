@@ -18,7 +18,8 @@ namespace ECommerceMVC.Controllers
         }
         public IActionResult Index()
         {
-            return View();
+            var cartCollection = getCollectionFromSession();
+            return View(cartCollection);
         }
         public async Task<IActionResult> Add(int id)
         {
