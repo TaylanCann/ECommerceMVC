@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Newtonsoft.Json;
 
 namespace ECommerceMVC.Extensions
 {
@@ -6,7 +7,7 @@ namespace ECommerceMVC.Extensions
     {
         public static void SetJson(this ISession session,string key,object value) 
         { 
-            session.SetJson(key,value); 
+            session.SetString(key,JsonConvert.SerializeObject(value)); 
         }
     }
 }
