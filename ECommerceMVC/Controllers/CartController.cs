@@ -1,4 +1,5 @@
 ﻿using ECommerceMVC.Business.Services;
+using ECommerceMVC.Extensions;
 using ECommerceMVC.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -40,7 +41,7 @@ namespace ECommerceMVC.Controllers
 
         private void saveToSession(CartCollection cardCollection)
         {
-            HttpContext.Session.SetString("basket", JsonConvert.SerializeObject(cardCollection));
+            HttpContext.Session.SetJson("basket", cardCollection);
         }
 
         private CartCollection getCollectionFromSession()
