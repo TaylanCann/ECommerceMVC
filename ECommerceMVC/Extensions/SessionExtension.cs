@@ -9,5 +9,11 @@ namespace ECommerceMVC.Extensions
         { 
             session.SetString(key,JsonConvert.SerializeObject(value)); 
         }
+        public static T GetJson<T>(this ISession session, string key)
+        {
+            string result = session.GetString(key);
+            T response = JsonConvert.DeserializeObject<T>(result);
+            return response;
+        }
     }
 }
