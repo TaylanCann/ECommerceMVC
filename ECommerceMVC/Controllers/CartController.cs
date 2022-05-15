@@ -57,15 +57,20 @@ namespace ECommerceMVC.Controllers
             //    cartCollection = JsonConvert.DeserializeObject<CartCollection>(cartCollectionJson);
 
             //}
-            if (HttpContext.Session.GetString("basket") == null) 
-            {
-                cartCollection = new CartCollection();
-            }
-            else
-            {
-                var cartCollectionJson = HttpContext.Session.GetString("basket");
-                cartCollection = JsonConvert.DeserializeObject<CartCollection>(cartCollectionJson);
-            }
+
+
+            //if (HttpContext.Session.GetString("basket") == null) 
+            //{
+            //    cartCollection = new CartCollection();
+            //}
+            //else
+            //{
+            //    var cartCollectionJson = HttpContext.Session.GetString("basket");
+            //    cartCollection = JsonConvert.DeserializeObject<CartCollection>(cartCollectionJson);
+            //}
+
+            cartCollection = HttpContext.Session.GetJson<CartCollection>("basket");
+
             return cartCollection;
         }
     }
