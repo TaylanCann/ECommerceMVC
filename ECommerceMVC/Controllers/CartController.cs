@@ -51,6 +51,7 @@ namespace ECommerceMVC.Controllers
             //{
             //    cartCollection = new CartCollection();
             //}
+
             //else
             //{
             //    var cartCollectionJson = HttpContext.Session.GetString("sepetim");
