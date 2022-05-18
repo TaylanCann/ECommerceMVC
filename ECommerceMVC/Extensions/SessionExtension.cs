@@ -12,8 +12,8 @@ namespace ECommerceMVC.Extensions
         public static T GetJson<T>(this ISession session, string key)
         {
             string result = session.GetString(key);
-            T response = JsonConvert.DeserializeObject<T>(result);
-            return default(T) ?? response;
+            
+            return result == null ? default(T) : JsonConvert.DeserializeObject<T>(key);
         }
     }
 }
