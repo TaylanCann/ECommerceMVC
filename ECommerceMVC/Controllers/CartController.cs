@@ -70,7 +70,7 @@ namespace ECommerceMVC.Controllers
             //    cartCollection = JsonConvert.DeserializeObject<CartCollection>(cartCollectionJson);
             //}
 
-            cartCollection = HttpContext.Session.GetJson<CartCollection>("basket");
+            cartCollection = HttpContext.Session.GetJson<CartCollection>("basket") ?? new CartCollection();
 
             return cartCollection;
         }
