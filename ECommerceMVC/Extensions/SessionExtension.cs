@@ -13,7 +13,7 @@ namespace ECommerceMVC.Extensions
         {
             string result = session.GetString(key);
             T response = JsonConvert.DeserializeObject<T>(result);
-            return response;
+            return default(T) ?? response;
         }
     }
 }
