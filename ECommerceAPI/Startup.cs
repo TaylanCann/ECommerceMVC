@@ -41,8 +41,12 @@ namespace ECommerceAPI
             services.AddScoped<IProductService, ProductService>();
             services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<IProductRepository, EFProductRepository>();
+
+            var connectionString = Configuration.GetConnectionString("db");
+
             services.AddAutoMapper(typeof(MapProfile));
-            services.AddDbContext<ECommerceDbContext>(opt => opt.UseSqlServer());
+            services.AddDbContext<ECommerceDbContext>(opt => opt.UseSqlServer(connectionString));
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
