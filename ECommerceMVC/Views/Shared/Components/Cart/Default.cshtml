@@ -1,1 +1,3 @@
 ﻿@model CartCollection
+
+ <a class="nav-link" asp-action="Index" asp-controller="Cart" >MyBasket (@Model.cartItems.Count) - @Model.GetTotalPrice() TL</a>
