@@ -22,6 +22,7 @@
           <a class="nav-link active" aria-current="page" href="#">Home</a>
         </li>
         <li class="nav-item">
+            @await Component.InvokeAsync("Cart")
           <a class="nav-link" asp-action="Index" asp-controller="Cart" >MyBasket</a>
         </li>
         <li class="nav-item dropdown">
