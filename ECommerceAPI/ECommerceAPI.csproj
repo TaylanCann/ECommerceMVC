@@ -9,10 +9,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\ECommerceMVC.Business\ECommerceMVC.Business.csproj" />
     <ProjectReference Include="..\ECommerceMVC\ECommerceMVC.csproj" />
   </ItemGroup>

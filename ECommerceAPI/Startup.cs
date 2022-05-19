@@ -1,10 +1,13 @@
 using ECommerceMVC.Business.IServices;
+using ECommerceMVC.Business.MapperProfile;
 using ECommerceMVC.Business.Services;
+using ECommerceMVC.DataAccess.Data;
 using ECommerceMVC.DataAccess.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -38,6 +41,8 @@ namespace ECommerceAPI
             services.AddScoped<IProductService, ProductService>();
             services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<IProductRepository, EFProductRepository>();
+            services.AddAutoMapper(typeof(MapProfile));
+            services.AddDbContext<ECommerceDbContext>(opt => opt.UseSqlServer());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
