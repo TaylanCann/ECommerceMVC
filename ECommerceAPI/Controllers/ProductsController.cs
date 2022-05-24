@@ -59,14 +59,13 @@ namespace ECommerceAPI.Controllers
           
         }
         [HttpDelete("{id}")]
+        [IsExist]
         public async Task<IActionResult> Delete(int id)
         {
-            if (await productService.IsExist(id))
-            {
+           
                 await productService.DeleteProduct(id);
                 return Ok();
-            }
-            return NotFound();
+            
         }
     }
 }
