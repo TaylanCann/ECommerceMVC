@@ -33,7 +33,7 @@ namespace ECommerceAPI.Controllers
             }
             return Ok(product);
         }
-
+        [HttpPost]
         public async Task<IActionResult> AddProduct(AddProductRequest request)
         {
             if (ModelState.IsValid)
