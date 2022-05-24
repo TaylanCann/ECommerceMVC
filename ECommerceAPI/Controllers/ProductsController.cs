@@ -22,5 +22,15 @@ namespace ECommerceAPI.Controllers
             var products = await productService.GetProducts();
             return Ok(products);
         }
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetProductsById(int id)
+        {
+            var product = await productService.GetProductById(id);
+            if (product==null)
+            {
+                return NotFound(new {message = $"{id} numaralı ürün bulunamadı."});
+            }
+            return Ok(product);
+        }
     }
 }
