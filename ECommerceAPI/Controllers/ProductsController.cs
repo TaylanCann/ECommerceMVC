@@ -1,4 +1,5 @@
-﻿using ECommerceMVC.Business.Services;
+﻿using ECommerceAPI.Filters;
+using ECommerceMVC.Business.Services;
 using ECommerceMVC.Dtos.Requests;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -43,19 +44,19 @@ namespace ECommerceAPI.Controllers
             }
             return BadRequest();
         }
+
         [HttpPut("{id}")]
+        [IsExist]
         public async Task<IActionResult> Update(int id,UpdateProductRequest request)
         {
-            if (await productService.IsExist(id))
-            {
+          
                 if (ModelState.IsValid)
                 {
                     await productService.UpdateProduct(request);
                     return Ok();
                 }
                 return BadRequest();
-            }
-            return NotFound(new {message = $"Item {id} not found" });
+          
         }
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
