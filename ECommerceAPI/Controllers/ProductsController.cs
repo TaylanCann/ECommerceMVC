@@ -1,4 +1,5 @@
 ﻿using ECommerceMVC.Business.Services;
+using ECommerceMVC.Dtos.Requests;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -31,6 +32,16 @@ namespace ECommerceAPI.Controllers
                 return NotFound(new {message = $"{id} numaralı ürün bulunamadı."});
             }
             return Ok(product);
+        }
+
+        public async Task<IActionResult> AddProduct(AddProductRequest request)
+        {
+            if (ModelState.IsValid)
+            {
+                var addedProductId = await productService.AddProduct(request);
+                return CreatedAtAction(nameof(GetProductsById), routeValues: new { id = addedProductId }, null);
+            }
+            return BadRequest();
         }
     }
 }
