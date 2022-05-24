@@ -29,7 +29,7 @@ namespace ECommerceAPI.Controllers
             var product = await productService.GetProductById(id);
             if (product==null)
             {
-                return NotFound(new {message = $"{id} numaralı ürün bulunamadı."});
+                return NotFound(new {message = $"Item {id} not found."});
             }
             return Ok(product);
         }
@@ -42,6 +42,30 @@ namespace ECommerceAPI.Controllers
                 return CreatedAtAction(nameof(GetProductsById), routeValues: new { id = addedProductId }, null);
             }
             return BadRequest();
+        }
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update(int id,UpdateProductRequest request)
+        {
+            if (await productService.IsExist(id))
+            {
+                if (ModelState.IsValid)
+                {
+                    await productService.UpdateProduct(request);
+                    return Ok();
+                }
+                return BadRequest();
+            }
+            return NotFound(new {message = $"Item {id} not found" });
+        }
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            if (await productService.IsExist(id))
+            {
+                await productService.DeleteProduct(id);
+                return Ok();
+            }
+            return NotFound();
         }
     }
 }
