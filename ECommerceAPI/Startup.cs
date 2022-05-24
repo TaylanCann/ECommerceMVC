@@ -46,6 +46,14 @@ namespace ECommerceAPI
 
             services.AddAutoMapper(typeof(MapProfile));
             services.AddDbContext<ECommerceDbContext>(opt => opt.UseSqlServer(connectionString));
+
+            services.AddCors(opt => opt.AddPolicy("Allow", builder =>
+            {
+                builder.AllowAnyOrigin();
+                builder.AllowAnyMethod();
+                builder.AllowAnyHeader();
+
+            }));
             
         }
 
@@ -63,6 +71,7 @@ namespace ECommerceAPI
 
             app.UseRouting();
 
+            app.UseCors("Allow");
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
