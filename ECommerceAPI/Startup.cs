@@ -61,6 +61,17 @@ namespace ECommerceAPI
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+
+            app.Map("/test", xapp => xapp.Run(async x =>
+            {
+                var queryExist = x.Request.Query.ContainsKey("id");
+                if (queryExist)
+                {
+                    var id = int.Parse(x.Request.Query["id"]);
+                    //var productService = 
+                }
+            }));
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
