@@ -91,15 +91,16 @@ namespace ECommerceAPI
 
             app.Use(async (context, next) =>
             {
-                Console.WriteLine(context.Request.Method);
+                await next.Invoke();
+
+                //Console.WriteLine(context.Request.Method);
                 var isJsonContent = context.Request.HasJsonContentType();
-                Console.WriteLine(isJsonContent);
+                //Console.WriteLine(isJsonContent);
                 if (isJsonContent)
                 {
                     dynamic body = await context.Request.ReadFromJsonAsync<dynamic>();
                     dynamic type = JsonConvert.DeserializeObject<dynamic>(body).ToString();
                 }
-                await next.Invoke();
             });
 
             if (env.IsDevelopment())
