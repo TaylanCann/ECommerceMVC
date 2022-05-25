@@ -5,6 +5,7 @@ using ECommerceMVC.DataAccess.Data;
 using ECommerceMVC.DataAccess.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -43,6 +44,7 @@ namespace ECommerceAPI
             services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<IProductRepository, EFProductRepository>();
 
+           
             var connectionString = Configuration.GetConnectionString("db");
 
             services.AddAutoMapper(typeof(MapProfile));
@@ -62,13 +64,27 @@ namespace ECommerceAPI
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
 
+            var scope = app.ApplicationServices.CreateScope();
+            var productService = scope.ServiceProvider.GetRequiredService<IProductService>();
+
             app.Map("/test", xapp => xapp.Run(async x =>
             {
                 var queryExist = x.Request.Query.ContainsKey("id");
                 if (queryExist)
                 {
                     var id = int.Parse(x.Request.Query["id"]);
-                    //var productService = 
+                    if (await productService.IsExist(id))
+                    {
+                        await x.Response.WriteAsync($"Id {id} is available");
+                    }
+                    else
+                    {
+                        await x.Response.WriteAsync($"Id {id} is not available");
+                    }
+                }
+                else
+                {
+                    await x.Response.WriteAsync($"There is no Id");
                 }
             }));
 
