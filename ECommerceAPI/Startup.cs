@@ -14,6 +14,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -96,7 +97,8 @@ namespace ECommerceAPI
                 if (isJsonContent)
                 {
                     dynamic body = await context.Request.ReadFromJsonAsync<dynamic>();
-                    Console.WriteLine(body.ToString());
+                    dynamic type = JsonConvert.DeserializeObject<dynamic>(body).ToString();
+                    Console.WriteLine(type.name);
                 }
                 await next.Invoke();
             });
