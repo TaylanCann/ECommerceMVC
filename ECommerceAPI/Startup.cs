@@ -44,7 +44,7 @@ namespace ECommerceAPI
             services.AddScoped<IProductService, ProductService>();
             services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<IProductRepository, EFProductRepository>();
-
+            services.AddScoped<IUserService, UserService>();
            
             var connectionString = Configuration.GetConnectionString("db");
 
@@ -98,7 +98,6 @@ namespace ECommerceAPI
                 {
                     dynamic body = await context.Request.ReadFromJsonAsync<dynamic>();
                     dynamic type = JsonConvert.DeserializeObject<dynamic>(body).ToString();
-                    Console.WriteLine(type.name);
                 }
                 await next.Invoke();
             });
