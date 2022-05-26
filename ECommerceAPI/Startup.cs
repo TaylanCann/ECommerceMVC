@@ -48,6 +48,13 @@ namespace ECommerceAPI
             services.AddScoped<IUserRepository, EFUserRepository>();
 
             services.AddMemoryCache();
+            services.AddDistributedMemoryCache();
+            services.AddDistributedSqlServerCache(options =>
+            {
+                options.ConnectionString = "Data Source=(localdb)\\MSSQLLocalDb;Database=DistributedCacheDb;Integrated Security=True";
+                options.SchemaName = "dbo";
+                options.TableName = "TestCache";
+            });
 
             var connectionString = Configuration.GetConnectionString("db");
 
