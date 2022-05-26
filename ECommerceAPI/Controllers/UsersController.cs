@@ -62,9 +62,12 @@ namespace ECommerceAPI.Controllers
                     }) ;
                 }
 
+                cache.GetOrCreate("alternative", entry =>
+                {
+                    
+                });
 
-
-                return Ok(new { token = new JwtSecurityTokenHandler().WriteToken(token) });
+                return Ok(new { token = new JwtSecurityTokenHandler().WriteToken(cachedToken) });
             }
             return BadRequest(new {message = "User Name or password is wrong"});
         }
