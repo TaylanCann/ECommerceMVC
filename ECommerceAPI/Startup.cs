@@ -47,6 +47,8 @@ namespace ECommerceAPI
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IUserRepository, EFUserRepository>();
 
+            services.AddMemoryCache();
+
             var connectionString = Configuration.GetConnectionString("db");
 
             services.AddAutoMapper(typeof(MapProfile));
