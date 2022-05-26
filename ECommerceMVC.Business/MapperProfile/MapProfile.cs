@@ -17,6 +17,7 @@ namespace ECommerceMVC.Business.MapperProfile
             CreateMap<Product,ProductListResponse>();
             CreateMap<AddProductRequest,Product>();
             CreateMap<UpdateProductRequest,Product>();
+            CreateMap<User, UserLoginResponse>();
 
         }
     }

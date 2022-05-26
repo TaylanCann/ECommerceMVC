@@ -7,6 +7,7 @@ using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace ECommerceAPI.Controllers
 {
@@ -22,18 +23,20 @@ namespace ECommerceAPI.Controllers
         }
 
         [HttpPost]
-       public IActionResult Login(UserLoginModel model)
+       public async Task<IActionResult> Login(UserLoginModel model)
         {
-            var user = userService.ValidateUser(model.UserName, model.Password);
+            var user = await userService.ValidateUser(model.UserName, model.Password);
             if (user != null)
             {
                 var claims = new[]
                 {
-                    new Claim(JwtRegisteredClaimNames.UniqueName,user.Result.UserName),
-                    new Claim(ClaimTypes.Role,user.Result.Role)
+                    new Claim(JwtRegisteredClaimNames.UniqueName,user.UserName),
+                    new Claim(ClaimTypes.Role, user.Role),
+
                 };
 
-                var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("Buraya tikkat"));
+
+                var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("Buraya tikkat burası gizli"));
                 var cridential = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
                 var token = new JwtSecurityToken(

@@ -51,5 +51,7 @@ namespace ECommerceMVC.DataAccess.Repositories
         {
             return await context.Users.FirstOrDefaultAsync(u => u.UserName == UserName && u.Password == Password && u.IsActive == true);
         }
+
     }
 }
+
