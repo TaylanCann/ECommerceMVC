@@ -2,6 +2,7 @@
 using ECommerceMVC.Business.IServices;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Memory;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.IdentityModel.Tokens.Jwt;
@@ -16,10 +17,12 @@ namespace ECommerceAPI.Controllers
     public class UsersController : ControllerBase
     {
         private readonly IUserService userService;
+        private readonly IMemoryCache cache;
 
-        public UsersController(IUserService userService)
+        public UsersController(IUserService userService, IMemoryCache cache)
         {
             this.userService = userService;
+            this.cache = cache;
         }
 
         [HttpPost]
@@ -39,14 +42,28 @@ namespace ECommerceAPI.Controllers
                 var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("Buraya tikkat burası gizli"));
                 var cridential = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
-                var token = new JwtSecurityToken(
-                    issuer:"turkcell.com.tr",
-                    audience:"turkcell.com.tr",
-                    claims:claims,
+                
+                var isInCache = cache.TryGetValue("userCache", out JwtSecurityToken cachedToken);
+                if (isInCache == false)
+                {
+                    var token = new JwtSecurityToken(
+                    issuer: "turkcell.com.tr",
+                    audience: "turkcell.com.tr",
+                    claims: claims,
                     notBefore: DateTime.Now,
-                    expires:DateTime.Now.AddMinutes(20),
-                    signingCredentials:cridential
+                    expires: DateTime.Now.AddMinutes(20),
+                    signingCredentials: cridential
                     );
+
+                    cachedToken = token;
+                    cache.Set("userCache", token, new MemoryCacheEntryOptions
+                    {
+                        AbsoluteExpiration = DateTime.Now.AddMinutes(5) 
+                    }) ;
+                }
+
+
+
                 return Ok(new { token = new JwtSecurityTokenHandler().WriteToken(token) });
             }
             return BadRequest(new {message = "User Name or password is wrong"});
