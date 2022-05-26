@@ -45,7 +45,8 @@ namespace ECommerceAPI
             services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<IProductRepository, EFProductRepository>();
             services.AddScoped<IUserService, UserService>();
-           
+            services.AddScoped<IUserRepository, EFUserRepository>();
+
             var connectionString = Configuration.GetConnectionString("db");
 
             services.AddAutoMapper(typeof(MapProfile));
@@ -98,8 +99,9 @@ namespace ECommerceAPI
                 //Console.WriteLine(isJsonContent);
                 if (isJsonContent)
                 {
-                    dynamic body = await context.Request.ReadFromJsonAsync<dynamic>();
-                    dynamic type = JsonConvert.DeserializeObject<dynamic>(body).ToString();
+                    Console.WriteLine("There is json data in the incoming request");
+                    //dynamic body = await context.Request.ReadFromJsonAsync<dynamic>();
+                    //dynamic type = JsonConvert.DeserializeObject<dynamic>(body).ToString();
                 }
             });
 
