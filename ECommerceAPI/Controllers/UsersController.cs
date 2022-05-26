@@ -39,7 +39,7 @@ namespace ECommerceAPI.Controllers
                 };
 
 
-                var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("Buraya tikkat burası gizli"));
+                var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("Buraya dikkat burası gizli"));
                 var cridential = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
                 
@@ -64,13 +64,18 @@ namespace ECommerceAPI.Controllers
 
                 cache.GetOrCreate("alternative", entry =>
                 {
-                    
+                    entry.SlidingExpiration = TimeSpan.FromMinutes(5);
+                    return new[] { "A", "B", "C" };
                 });
 
                 return Ok(new { token = new JwtSecurityTokenHandler().WriteToken(cachedToken) });
             }
             return BadRequest(new {message = "User Name or password is wrong"});
         }
-        
+        [HttpGet("[action]")]
+        public IActionResult GetCache()
+        {
+            return Ok(cache.Get("alternative"));
+        }
     }
 }
