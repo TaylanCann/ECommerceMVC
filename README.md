@@ -12,3 +12,4 @@ Simple Injector <br>
 API <br>
 Cookies <br>
 Cache <br>
+Middleware
