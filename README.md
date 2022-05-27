@@ -9,4 +9,6 @@ Repository Pattern <br>
 Protection from Brute Force Attack <br>
 Protection from Cross Site Request Forgery (XSRF) Attack <br>
 Simple Injector <br>
-API added
+API <br>
+Cookies <br>
+Cache <br>
