@@ -50,6 +50,7 @@ namespace ECommerceAPI
 
             services.AddMemoryCache();
             services.AddDistributedMemoryCache();
+
             services.AddDistributedSqlServerCache(options =>
             {
                 options.ConnectionString = "Data Source=(localdb)\\MSSQLLocalDb;Database=DistributedCacheDb;Integrated Security=True";
